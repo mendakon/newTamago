@@ -63,13 +63,16 @@ const waitHarfTime = () => {
      * 30分おきに作動
      */
     while(true){
-        //if(waitHarfTime()){console.log("ボンバイエ")}
+        if(waitHarfTime()){
+            const osyaberi = await makeTootContents()
+            if(osyabri.length <=0)continue
+            toot.toot(M,osyaberi)
+        }
         const word = loadToot.queueStack.shift()
         if(word){
             await saveElements(word)
         }
-        await (async()=>new Promise((resolve)=>setTimeout(()=>resolve(),1000)))()
-        console.log("--------------------------------------------------")
-        console.log(await makeTootContents())
+        await (async()=>new Promise((resolve)=>setTimeout(()=>resolve(),100)))()
+        
     }
 })()
