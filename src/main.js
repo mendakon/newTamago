@@ -64,8 +64,17 @@ const waitHarfTime = () => {
      */
     while(true){
         if(waitHarfTime()){
-            const osyaberi = await makeTootContents()
-            if(osyabri.length <=0)continue
+            let osyaberi = ""
+	    for(;;){
+                try {
+                    osyaberi = await makeTootContents()
+                } catch (error) {
+                    console.error(error)
+                    continue
+                }
+                if(osyaberi.length < 500)break;
+            }
+            if(osyaberi.length <=0)continue
             toot.toot(M,osyaberi)
         }
         const word = loadToot.queueStack.shift()
